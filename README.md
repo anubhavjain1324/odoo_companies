@@ -5,7 +5,7 @@ companies, filterable by country and certification tier (Gold / Silver /
 Ready). Every listing links out to that company's real, official profile on
 `odoo.com/partners` — no contact details are invented.
 
-Currently includes 297 real partner companies across 16 countries (India,
+Currently includes 465 real partner companies across 16 countries (India,
 USA, UK, Germany, UAE, Canada, Netherlands, Australia, France, Belgium,
 Brazil, Spain, Italy, Mexico, Saudi Arabia, Egypt), pulled from Odoo's own
 public directory. Each country also has a short original "Odoo Partners in
