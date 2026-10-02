@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odoo Partners Directory — Find Odoo Implementation Companies Worldwide</title>
+<meta name="description" content="Browse a searchable directory of official Odoo implementation partner companies by country and certification tier. Find Odoo Gold, Silver, and Ready partners with links to their official profiles.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://YOUR-SITE-URL-HERE/">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Odoo Partners Directory">
+<meta property="og:description" content="Searchable directory of official Odoo implementation partners worldwide — browse by country and tier.">
+<meta property="og:type" content="website">
+
+<!-- TODO: Replace with your own AdSense publisher ID once approved -->
+<!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+
+<style>
+  :root{
+    --bg:#f7f8fa; --surface:#ffffff; --border:#e3e6ea; --text:#1b2430; --muted:#5b6672;
+    --accent:#714b67; --accent-ink:#ffffff; --gold:#c08a2e; --silver:#8a93a1; --ready:#4f7fbf;
+    --radius:10px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#14171c; --surface:#1c2027; --border:#2b313b; --text:#e9ecef; --muted:#9aa4b2; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  header{padding:2.5rem 1.5rem 1.5rem;text-align:center;max-width:900px;margin:0 auto}
+  header h1{font-size:1.9rem;margin:0 0 .5rem}
+  header p{color:var(--muted);margin:0;line-height:1.5}
+  .ad-slot{max-width:900px;margin:1rem auto;min-height:0;text-align:center}
+  .controls{max-width:1100px;margin:1.5rem auto 0;padding:0 1.5rem;display:flex;gap:.75rem;flex-wrap:wrap}
+  .controls input, .controls select{
+    padding:.65rem .9rem;border:1px solid var(--border);border-radius:var(--radius);
+    background:var(--surface);color:var(--text);font-size:.95rem;
+  }
+  .controls input{flex:1;min-width:200px}
+  .stats{max-width:1100px;margin:.75rem auto 0;padding:0 1.5rem;color:var(--muted);font-size:.85rem}
+  main{max-width:1100px;margin:0 auto;padding:1rem 1.5rem 3rem}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-top:1rem}
+  .card{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:1.1rem 1.2rem;display:flex;flex-direction:column;gap:.5rem;
+  }
+  .card h3{margin:0;font-size:1.02rem;line-height:1.3}
+  .card .meta{display:flex;gap:.4rem;flex-wrap:wrap;font-size:.78rem;color:var(--muted)}
+  .badge{padding:.15rem .55rem;border-radius:999px;font-weight:600;font-size:.72rem;color:#fff}
+  .badge.Gold{background:var(--gold)}
+  .badge.Silver{background:var(--silver)}
+  .badge.Ready{background:var(--ready)}
+  .country-chip{padding:.15rem .55rem;border-radius:999px;background:var(--bg);border:1px solid var(--border)}
+  .card a.profile-link{
+    margin-top:auto;font-size:.85rem;color:var(--accent);text-decoration:none;font-weight:600;
+  }
+  .card a.profile-link:hover{text-decoration:underline}
+  .empty{text-align:center;color:var(--muted);padding:3rem 1rem}
+  footer{max-width:1100px;margin:0 auto;padding:1.5rem;color:var(--muted);font-size:.82rem;line-height:1.6;border-top:1px solid var(--border)}
+  footer a{color:var(--accent)}
+
+  .guides{max-width:1100px;margin:2rem auto 0;padding:0 1.5rem}
+  .guides h2{font-size:1.3rem;margin-bottom:.25rem}
+  .guides > p.intro{color:var(--muted);margin-top:0}
+  .guide-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-top:1rem}
+  .guide-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.1rem}
+  .guide-card h3{margin:0 0 .4rem;font-size:1rem}
+  .guide-card p{margin:0;font-size:.85rem;color:var(--muted);line-height:1.5}
+  .guide-card button{
+    margin-top:.6rem;font-size:.78rem;padding:.3rem .7rem;border-radius:999px;border:1px solid var(--border);
+    background:var(--bg);color:var(--text);cursor:pointer;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Odoo Partners Directory</h1>
+  <p>A searchable directory of official Odoo implementation partner companies — browse by country and certification tier. Every listing links directly to that company's official Odoo partner profile.</p>
+</header>
+
+<!-- Ad slot: top banner (fill in your <ins class="adsbygoogle"> unit once AdSense is approved) -->
+<div class="ad-slot" id="ad-top"></div>
+
+<div class="controls">
+  <input type="text" id="search" placeholder="Search by company name…" autocomplete="off">
+  <select id="country-filter"><option value="">All countries</option></select>
+  <select id="tier-filter">
+    <option value="">All tiers</option>
+    <option value="Gold">Gold</option>
+    <option value="Silver">Silver</option>
+    <option value="Ready">Ready</option>
+  </select>
+</div>
+<div class="stats" id="stats"></div>
+
+<main>
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty" hidden>No companies match your search.</div>
+</main>
+
+<section class="guides" id="guides">
+  <h2>Odoo Partners by Country</h2>
+  <p class="intro">What to know about the Odoo implementation market in each country before you reach out — click a card to jump to that country's listings above.</p>
+  <div class="guide-grid" id="guide-grid"></div>
+</section>
+
+<!-- Ad slot: in-feed / bottom -->
+<div class="ad-slot" id="ad-bottom"></div>
+
+<footer>
+  <p><strong>About this data:</strong> All company listings are sourced from Odoo's own public
+  <a href="https://www.odoo.com/partners" target="_blank" rel="noopener">partner directory</a>
+  and link to each company's official Odoo profile page, where you can find verified contact and reference details.
+  This is an independent, unofficial directory and is not affiliated with, endorsed by, or sponsored by Odoo S.A.
+  "Odoo" is a trademark of Odoo S.A.</p>
+  <p>Listings last refreshed: October 2026. Found an error or want your company updated? The authoritative source is
+  <a href="https://www.odoo.com/partners" target="_blank" rel="noopener">odoo.com/partners</a>.</p>
+</footer>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
