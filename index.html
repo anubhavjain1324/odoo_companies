@@ -18,91 +18,187 @@
 
 <style>
   :root{
-    --bg:#f7f8fa; --surface:#ffffff; --border:#e3e6ea; --text:#1b2430; --muted:#5b6672;
-    --accent:#714b67; --accent-ink:#ffffff; --gold:#c08a2e; --silver:#8a93a1; --ready:#4f7fbf;
-    --radius:10px;
+    --bg:#f5f3f7; --surface:#ffffff; --border:#e4e0ea; --text:#201a2b; --muted:#6c6478;
+    --accent:#714b67; --accent2:#9b6b92; --accent-ink:#ffffff;
+    --gold:#b8862f; --silver:#78818f; --ready:#4a74ad;
+    --radius:12px; --shadow:0 1px 2px rgba(32,26,43,.04), 0 8px 24px -12px rgba(32,26,43,.12);
   }
   @media (prefers-color-scheme: dark){
-    :root{ --bg:#14171c; --surface:#1c2027; --border:#2b313b; --text:#e9ecef; --muted:#9aa4b2; }
+    :root{ --bg:#15131a; --surface:#1e1b26; --border:#312c3b; --text:#eeebf2; --muted:#a79fb3;
+      --shadow:0 1px 2px rgba(0,0,0,.2), 0 8px 24px -12px rgba(0,0,0,.5); }
   }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
-  header{padding:2.5rem 1.5rem 1.5rem;text-align:center;max-width:900px;margin:0 auto}
-  header h1{font-size:1.9rem;margin:0 0 .5rem}
-  header p{color:var(--muted);margin:0;line-height:1.5}
-  .ad-slot{max-width:900px;margin:1rem auto;min-height:0;text-align:center}
-  .controls{max-width:1100px;margin:1.5rem auto 0;padding:0 1.5rem;display:flex;gap:.75rem;flex-wrap:wrap}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5}
+  a{color:var(--accent)}
+
+  .hero{
+    background:linear-gradient(160deg,var(--accent) 0%,var(--accent2) 100%);
+    color:#fff;padding:3.2rem 1.5rem 3.6rem;text-align:center;
+  }
+  .hero .eyebrow{
+    display:inline-flex;align-items:center;gap:.4rem;font-size:.78rem;font-weight:700;letter-spacing:.06em;
+    text-transform:uppercase;background:rgba(255,255,255,.15);padding:.3rem .8rem;border-radius:999px;margin-bottom:1rem;
+  }
+  .hero h1{font-size:clamp(1.8rem,4vw,2.6rem);margin:0 0 .7rem;letter-spacing:-.01em}
+  .hero p{max-width:620px;margin:0 auto;color:rgba(255,255,255,.88);font-size:1.02rem}
+  .stats-row{
+    max-width:760px;margin:2rem auto 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1rem;
+  }
+  .stat{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);border-radius:var(--radius);padding:.9rem .5rem}
+  .stat b{display:block;font-size:1.5rem;line-height:1.2}
+  .stat span{font-size:.78rem;color:rgba(255,255,255,.8)}
+
+  .ad-slot{max-width:900px;margin:1.5rem auto;min-height:0;text-align:center}
+
+  .controls-wrap{position:sticky;top:0;z-index:10;background:var(--bg);padding-top:1.2rem;padding-bottom:.6rem;border-bottom:1px solid transparent}
+  .controls-wrap.stuck{border-bottom-color:var(--border);box-shadow:var(--shadow)}
+  .controls{max-width:1100px;margin:0 auto;padding:0 1.5rem;display:flex;gap:.75rem;flex-wrap:wrap}
   .controls input, .controls select{
-    padding:.65rem .9rem;border:1px solid var(--border);border-radius:var(--radius);
+    padding:.7rem 1rem;border:1px solid var(--border);border-radius:var(--radius);
     background:var(--surface);color:var(--text);font-size:.95rem;
   }
   .controls input{flex:1;min-width:200px}
-  .stats{max-width:1100px;margin:.75rem auto 0;padding:0 1.5rem;color:var(--muted);font-size:.85rem}
-  main{max-width:1100px;margin:0 auto;padding:1rem 1.5rem 3rem}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-top:1rem}
+  .stats{max-width:1100px;margin:.65rem auto 0;padding:0 1.5rem;color:var(--muted);font-size:.85rem}
+
+  main{max-width:1100px;margin:0 auto;padding:1rem 1.5rem 1rem}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1rem;margin-top:1rem}
   .card{
-    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-    padding:1.1rem 1.2rem;display:flex;flex-direction:column;gap:.5rem;
+    background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--border);border-radius:var(--radius);
+    padding:1.1rem 1.2rem;display:flex;flex-direction:column;gap:.55rem;box-shadow:var(--shadow);
+    transition:transform .12s ease, box-shadow .12s ease;
   }
+  .card:hover{transform:translateY(-2px)}
+  .card.Gold{border-left-color:var(--gold)}
+  .card.Silver{border-left-color:var(--silver)}
+  .card.Ready{border-left-color:var(--ready)}
   .card h3{margin:0;font-size:1.02rem;line-height:1.3}
-  .card .meta{display:flex;gap:.4rem;flex-wrap:wrap;font-size:.78rem;color:var(--muted)}
-  .badge{padding:.15rem .55rem;border-radius:999px;font-weight:600;font-size:.72rem;color:#fff}
+  .card .meta{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center;font-size:.78rem;color:var(--muted)}
+  .badge{padding:.15rem .6rem;border-radius:999px;font-weight:700;font-size:.72rem;color:#fff;letter-spacing:.01em}
   .badge.Gold{background:var(--gold)}
   .badge.Silver{background:var(--silver)}
   .badge.Ready{background:var(--ready)}
   .country-chip{padding:.15rem .55rem;border-radius:999px;background:var(--bg);border:1px solid var(--border)}
   .card a.profile-link{
-    margin-top:auto;font-size:.85rem;color:var(--accent);text-decoration:none;font-weight:600;
+    margin-top:auto;font-size:.85rem;color:var(--accent);text-decoration:none;font-weight:700;
+    display:inline-flex;align-items:center;gap:.25rem;
   }
   .card a.profile-link:hover{text-decoration:underline}
   .empty{text-align:center;color:var(--muted);padding:3rem 1rem}
-  footer{max-width:1100px;margin:0 auto;padding:1.5rem;color:var(--muted);font-size:.82rem;line-height:1.6;border-top:1px solid var(--border)}
-  footer a{color:var(--accent)}
-
-  .guides{max-width:1100px;margin:2rem auto 0;padding:0 1.5rem}
-  .guides h2{font-size:1.3rem;margin-bottom:.25rem}
-  .guides > p.intro{color:var(--muted);margin-top:0}
-  .guide-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-top:1rem}
-  .guide-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.1rem}
-  .guide-card h3{margin:0 0 .4rem;font-size:1rem}
-  .guide-card p{margin:0;font-size:.85rem;color:var(--muted);line-height:1.5}
-  .guide-card button{
-    margin-top:.6rem;font-size:.78rem;padding:.3rem .7rem;border-radius:999px;border:1px solid var(--border);
-    background:var(--bg);color:var(--text);cursor:pointer;
+  .pager{display:flex;justify-content:center;gap:.5rem;margin:1.6rem 0 .5rem}
+  .pager button{
+    padding:.5rem 1.1rem;border-radius:999px;border:1px solid var(--border);background:var(--surface);
+    color:var(--text);cursor:pointer;font-size:.85rem;font-weight:600;
   }
+  .pager button:disabled{opacity:.4;cursor:default}
+
+  section.content{max-width:1100px;margin:2.5rem auto 0;padding:0 1.5rem}
+  section.content h2{font-size:1.35rem;margin-bottom:.25rem;letter-spacing:-.01em}
+  section.content > p.intro{color:var(--muted);margin-top:0;max-width:720px}
+
+  .guide-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-top:1rem}
+  .guide-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem 1.2rem;box-shadow:var(--shadow)}
+  .guide-card h3{margin:0 0 .4rem;font-size:1rem;display:flex;align-items:center;gap:.4rem}
+  .guide-card p{margin:0;font-size:.85rem;color:var(--muted);line-height:1.55}
+  .guide-card button{
+    margin-top:.7rem;font-size:.78rem;padding:.35rem .8rem;border-radius:999px;border:1px solid var(--border);
+    background:var(--bg);color:var(--text);cursor:pointer;font-weight:600;
+  }
+  .guide-card button:hover{border-color:var(--accent);color:var(--accent)}
+
+  .tier-explainer{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1rem}
+  .tier-explainer .t{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem 1.2rem;box-shadow:var(--shadow)}
+  .tier-explainer .t h3{margin:0 0 .4rem;font-size:.95rem}
+  .tier-explainer .t p{margin:0;font-size:.85rem;color:var(--muted);line-height:1.55}
+
+  .faq{margin-top:1rem}
+  .faq details{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:.9rem 1.1rem;margin-bottom:.6rem;box-shadow:var(--shadow);
+  }
+  .faq summary{cursor:pointer;font-weight:600;font-size:.95rem}
+  .faq p{margin:.6rem 0 0;color:var(--muted);font-size:.88rem;line-height:1.6}
+
+  footer{max-width:1100px;margin:2.5rem auto 0;padding:1.5rem;color:var(--muted);font-size:.82rem;line-height:1.6;border-top:1px solid var(--border)}
 </style>
 </head>
 <body>
 
-<header>
+<header class="hero">
+  <span class="eyebrow">297 real partners · 16 countries</span>
   <h1>Odoo Partners Directory</h1>
   <p>A searchable directory of official Odoo implementation partner companies — browse by country and certification tier. Every listing links directly to that company's official Odoo partner profile.</p>
+  <div class="stats-row" id="hero-stats"></div>
 </header>
 
 <!-- Ad slot: top banner (fill in your <ins class="adsbygoogle"> unit once AdSense is approved) -->
 <div class="ad-slot" id="ad-top"></div>
 
-<div class="controls">
-  <input type="text" id="search" placeholder="Search by company name…" autocomplete="off">
-  <select id="country-filter"><option value="">All countries</option></select>
-  <select id="tier-filter">
-    <option value="">All tiers</option>
-    <option value="Gold">Gold</option>
-    <option value="Silver">Silver</option>
-    <option value="Ready">Ready</option>
-  </select>
+<div class="controls-wrap" id="controls-wrap">
+  <div class="controls">
+    <input type="text" id="search" placeholder="Search by company name…" autocomplete="off">
+    <select id="country-filter"><option value="">All countries</option></select>
+    <select id="tier-filter">
+      <option value="">All tiers</option>
+      <option value="Gold">Gold</option>
+      <option value="Silver">Silver</option>
+      <option value="Ready">Ready</option>
+    </select>
+  </div>
+  <div class="stats" id="stats"></div>
 </div>
-<div class="stats" id="stats"></div>
 
 <main>
   <div class="grid" id="grid"></div>
   <div class="empty" id="empty" hidden>No companies match your search.</div>
+  <div class="pager" id="pager"></div>
 </main>
 
-<section class="guides" id="guides">
+<section class="content" id="guides">
   <h2>Odoo Partners by Country</h2>
   <p class="intro">What to know about the Odoo implementation market in each country before you reach out — click a card to jump to that country's listings above.</p>
   <div class="guide-grid" id="guide-grid"></div>
+</section>
+
+<section class="content" id="tiers">
+  <h2>What do Gold, Silver, and Ready mean?</h2>
+  <p class="intro">Odoo ranks its implementation partners into three tiers based on project history, certified consultants, and sales volume — not on price or quality of service, which still varies partner to partner.</p>
+  <div class="tier-explainer">
+    <div class="t">
+      <h3>🥇 Gold Partner</h3>
+      <p>The most experienced tier — typically dozens to hundreds of completed implementations and multiple Odoo-certified consultants on staff. Best fit for larger or more complex rollouts (multi-company, multi-country, heavy customization).</p>
+    </div>
+    <div class="t">
+      <h3>🥈 Silver Partner</h3>
+      <p>Established firms with a solid project track record, often specializing in a particular industry or region. A strong middle-ground choice for most small-to-mid-sized implementations.</p>
+    </div>
+    <div class="t">
+      <h3>🔰 Ready Partner</h3>
+      <p>Newer to the Odoo partner program or smaller/boutique firms. Can still be excellent for straightforward, standard-module implementations, often at a lower cost — worth asking for references regardless of tier.</p>
+    </div>
+  </div>
+</section>
+
+<section class="content" id="faq">
+  <h2>Frequently asked questions</h2>
+  <div class="faq">
+    <details>
+      <summary>How do I choose the right Odoo partner?</summary>
+      <p>Start by matching tier to project complexity (see above), then narrow by country/time-zone and industry experience. Always ask a shortlisted partner for 2-3 references from businesses similar in size and industry to yours, and get a fixed-scope quote for phase one rather than an open-ended hourly estimate.</p>
+    </details>
+    <details>
+      <summary>Is this an official Odoo website?</summary>
+      <p>No. This is an independent, unofficial directory. All listings are sourced from Odoo's own public partner directory at <a href="https://www.odoo.com/partners" target="_blank" rel="noopener">odoo.com/partners</a> and link out to each company's real, official Odoo profile page for verified details. "Odoo" is a trademark of Odoo S.A.; this site is not affiliated with or endorsed by Odoo S.A.</p>
+    </details>
+    <details>
+      <summary>Why isn't my country or company listed?</summary>
+      <p>This directory currently covers a curated set of 16 countries and is refreshed periodically, not a live mirror of Odoo's full partner list. The authoritative, complete, and most current list is always <a href="https://www.odoo.com/partners" target="_blank" rel="noopener">odoo.com/partners</a>.</p>
+    </details>
+    <details>
+      <summary>Does Odoo partner tier affect pricing?</summary>
+      <p>Not directly — tier reflects experience and scale, not a fixed rate card. Gold partners are often (not always) priced higher given demand and seniority, but a well-matched Silver or Ready partner can be more cost-effective for a straightforward implementation.</p>
+    </details>
+  </div>
 </section>
 
 <!-- Ad slot: in-feed / bottom -->
