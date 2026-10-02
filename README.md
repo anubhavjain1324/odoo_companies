@@ -44,8 +44,8 @@ Then visit http://localhost:8000
 5. Optional: add a custom domain for free under Settings → Pages →
    Custom domain (you still have to buy the domain itself — GitHub Pages
    hosting stays free either way).
-6. Once you have the final URL, replace `YOUR-SITE-URL-HERE` in
-   `index.html`, `robots.txt`, and `sitemap.xml`.
+6. Done — the site is live at https://anubhavjain1324.github.io/odoo_companies/
+   and `index.html`, `robots.txt`, and `sitemap.xml` already point to it.
 
 ## 3. Add Google AdSense (after you have real traffic)
 AdSense requires a live, indexable site with real content before it approves

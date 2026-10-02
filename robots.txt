@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://YOUR-SITE-URL-HERE/sitemap.xml
+Sitemap: https://anubhavjain1324.github.io/odoo_companies/sitemap.xml
