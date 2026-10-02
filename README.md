@@ -12,6 +12,12 @@ public directory. Each country also has a short original "Odoo Partners in
 [Country]" blurb (in `data.js` as `COUNTRY_INFO`) for SEO. You can add more
 countries/companies, or more blurbs, by editing `data.js`.
 
+Each entry also carries `phone`, `email`, `website`, and `address` fields,
+pulled verbatim from that company's own official Odoo profile page where
+published there (`null` if a profile doesn't list it — never invented).
+A known Odoo-wide generic support number is filtered out so it's never
+shown as if it were a specific company's own contact.
+
 ## Files
 - `index.html` — page structure, SEO meta tags, ad slot placeholders
 - `script.js` — search/filter logic (pure client-side, no backend needed)

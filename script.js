@@ -56,6 +56,13 @@
           <span class="badge ${p.tier}">${p.tier} Partner</span>
           <span class="country-chip">${FLAGS[p.country] || ""} ${escapeHtml(p.country)}</span>
         </div>
+        ${p.address ? `<div class="addr">📍 ${escapeHtml(p.address)}</div>` : ""}
+        <div class="contact">
+          ${p.phone ? `<a href="tel:${escapeHtml(p.phone.replace(/[^+\d]/g, ""))}">📞 ${escapeHtml(p.phone)}</a>` : ""}
+          ${p.email ? `<a href="mailto:${escapeHtml(p.email)}">✉️ ${escapeHtml(p.email)}</a>` : ""}
+          ${p.website ? `<a href="${escapeHtml(p.website.startsWith("http") ? p.website : "https://" + p.website)}" target="_blank" rel="noopener">🌐 Website</a>` : ""}
+        </div>
+        ${!p.phone && !p.email ? `<p class="no-contact">No direct contact published — see official profile.</p>` : ""}
         <a class="profile-link" href="${p.url}" target="_blank" rel="noopener">View official profile →</a>
       </div>
     `).join("");
